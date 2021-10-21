@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Landing from './Landing';
-import Register from './Register';
-import Login from './Login';
+import Landing from './components/auth/Landing';
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
 import * as firebase from 'firebase';
 
 const Stack = createStackNavigator();
