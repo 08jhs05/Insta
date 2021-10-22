@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { View, TextInput, StyleSheet, Button } from 'react-native';
 
+import firebase from 'firebase';
+
 export default function Register(props) {
     const [state, setState] = useState(
         {
@@ -14,6 +16,8 @@ export default function Register(props) {
         const { email, password, name } = state;
         props.firebaseApp.auth().createUserWithEmailAndPassword( email, password )
         .then( (result) => {
+            firebase.firestore().collection("users")
+            .doc(firebase.auth().currentUser.uid);
             console.log("log in success!!")
         }).catch( (error) => {
             console.log(error)
