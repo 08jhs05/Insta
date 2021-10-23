@@ -17,7 +17,11 @@ export default function Register(props) {
         props.firebaseApp.auth().createUserWithEmailAndPassword( email, password )
         .then( (result) => {
             firebase.firestore().collection("users")
-            .doc(firebase.auth().currentUser.uid);
+            .doc(firebase.auth().currentUser.uid)
+            .set({
+                name,
+                email
+            })
             console.log("log in success!!")
         }).catch( (error) => {
             console.log(error)

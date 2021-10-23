@@ -47,10 +47,6 @@ export default function App() {
 
   return (
     state.loaded ?
-      state.loggedIn ?
-        <SafeAreaView>
-          <Text>you are logged in.</Text>
-        </SafeAreaView> : 
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Landing">
           <Stack.Screen name="Landing" component={Landing} options={{ headerShown: false }}/>
