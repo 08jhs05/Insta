@@ -59,7 +59,9 @@ export default function App() {
     state.loaded ?
       state.loggedIn ?
         <Provider store={store}>
-          <Main />
+          <Stack.Navigator initialRouteName="Landing">
+            <Stack.Screen name="Main" component={Main} options={{ headerShown: false }}/>
+          </Stack.Navigator>
         </Provider>:
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Landing">
