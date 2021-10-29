@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchUser } from '../redux/actions';
 
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
+
 const mapStateToProps = (store) => ({
     currentUser: store.userState.currentUser
 });
