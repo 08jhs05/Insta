@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Button, SafeAreaView } from 'react-native'
+import { View, Text, Button, SafeAreaView, Image } from 'react-native'
 import * as ImagePicker from 'expo-image-picker';
 
-export default function Add() {
+export default function Add( { navigation } ) {
 
     const [state, setState] = useState({
         hasGalleryPermission: null,
-        image: null,
+        image: 'https://pbs.twimg.com/profile_images/1285016142692548608/aMPcy4Xp_400x400.jpg',
       });
 
     const pickImage = async () => {
@@ -37,10 +37,13 @@ export default function Add() {
           })();
     }, []);
 
+    let saveImage = state.image;
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Button title="Pick Image from Gallery" onPress={ pickImage }/>
-            {state.image && <Image source={{ uri: state.image }} style={{ width: 200, height: 200 }} />}
+            <Button title="Save" onPress={ () => { navigation.navigate('Save', { saveImage }) } }/>
+            <Image source={{ uri: state.image }} style={{ width: 400, height: 400 }} />
         </SafeAreaView>
     )
 }

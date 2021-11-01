@@ -14,6 +14,7 @@ import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './redux/reducers';
 import thunk from 'redux-thunk';
 import Add from './components/main/Add';
+import Save from './components/main/Save';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
@@ -33,7 +34,7 @@ if(firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
 
-export default function App() {
+export default function App(props) {
 
   const [state, setState] = useState({
     loaded: false,
@@ -63,7 +64,8 @@ export default function App() {
           <NavigationContainer>
             <Stack.Navigator initialRouteName="Main">
               <Stack.Screen name="Main" component={Main} options={{ headerShown: false }}/>
-              <Stack.Screen name="Add" component={Add}/>
+              <Stack.Screen name="Add" component={Add} navigation={props.navigation}/>
+              <Stack.Screen name="Save" component={Save} navigation={props.navigation}/>
             </Stack.Navigator>
           </NavigationContainer>
         </Provider>:
