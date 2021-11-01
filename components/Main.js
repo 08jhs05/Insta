@@ -4,9 +4,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchUser } from '../redux/actions';
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import Landing from './auth/Landing';
+import Feed from './main/Feed';
 
-const Tab = createBottomTabNavigator();
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Add from './main/Add';
+import Profile from './main/Profile';
+
+const Tab = createMaterialBottomTabNavigator();
 
 const mapStateToProps = (store) => ({
     currentUser: store.userState.currentUser
@@ -16,6 +22,8 @@ const mapDispatchProps = (dispatch) => bindActionCreators(
     { fetchUser }, dispatch
 );
 
+const EmptyScreen = () => {return null;};
+
 function Main(props) {
 
     useEffect(() => {
@@ -23,13 +31,30 @@ function Main(props) {
     }, []);
 
     return (
-        props.currentUser == undefined ? 
-        <SafeAreaView>
-            <Text>log in first</Text>
-        </SafeAreaView> :
-        <SafeAreaView>
-            <Text>User {props.currentUser.name} is logged in.</Text>
-        </SafeAreaView>
+        // props.currentUser == undefined ? 
+        // <SafeAreaView>
+        //     <Text>log in first</Text>
+        // </SafeAreaView> :
+        <Tab.Navigator initialRouteName="Feed" labeled={false}>
+            <Tab.Screen name="Home" component={Feed}
+                options={{
+                    tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="home" color={color} size={26} />
+                }}/>
+            <Tab.Screen name="AddContainer" component={EmptyScreen}
+                listeners={({ navigation }) => ({
+                        tabPress: event => {
+                            event.preventDefault();
+                            navigation.navigate("Add")
+                        }
+                    })}
+                options={{
+                    tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="plus" color={color} size={26} />
+                }}/>
+            <Tab.Screen name="Profile" component={Profile}
+                options={{
+                    tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="account-circle" color={color} size={26} />
+                }}/>
+        </Tab.Navigator>
     )
 }
 

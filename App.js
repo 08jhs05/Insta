@@ -13,6 +13,8 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './redux/reducers';
 import thunk from 'redux-thunk';
+import Add from './components/main/Add';
+
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const Stack = createStackNavigator();
@@ -34,13 +36,12 @@ if(firebase.apps.length === 0) {
 export default function App() {
 
   const [state, setState] = useState({
-    loaded: false 
+    loaded: false,
   });
 
   useEffect(() => {
+
     firebase.auth().onAuthStateChanged( (user) => {
-      console.log('onauthchanged?')
-      console.log(state)
       if(!user){
         setState({
           loaded: true,
@@ -59,9 +60,12 @@ export default function App() {
     state.loaded ?
       state.loggedIn ?
         <Provider store={store}>
-          <Stack.Navigator initialRouteName="Main">
-            <Stack.Screen name="Main" component={Main} options={{ headerShown: false }}/>
-          </Stack.Navigator>
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName="Main">
+              <Stack.Screen name="Main" component={Main} options={{ headerShown: false }}/>
+              <Stack.Screen name="Add" component={Add}/>
+            </Stack.Navigator>
+          </NavigationContainer>
         </Provider>:
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Landing">
