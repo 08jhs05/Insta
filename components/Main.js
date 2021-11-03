@@ -15,7 +15,8 @@ import Profile from './main/Profile';
 const Tab = createMaterialBottomTabNavigator();
 
 const mapStateToProps = (store) => ({
-    currentUser: store.userState.currentUser
+    currentUser: store.userState.currentUser,
+    posts: store.user.posts
 });
 
 const mapDispatchProps = (dispatch) => bindActionCreators(
@@ -28,6 +29,7 @@ function Main(props) {
 
     useEffect(() => {
         props.fetchUser();
+        props.fetchUserPosts();
     }, []);
 
     return (
