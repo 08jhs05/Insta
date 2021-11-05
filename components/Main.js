@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { View, Text, SafeAreaView } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchUser } from '../redux/actions';
+import { fetchUser, fetchUserPosts } from '../redux/actions';
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Landing from './auth/Landing';
@@ -16,11 +16,11 @@ const Tab = createMaterialBottomTabNavigator();
 
 const mapStateToProps = (store) => ({
     currentUser: store.userState.currentUser,
-    posts: store.user.posts
+    posts: store.userState.posts
 });
 
 const mapDispatchProps = (dispatch) => bindActionCreators(
-    { fetchUser }, dispatch
+    { fetchUser, fetchUserPosts }, dispatch
 );
 
 const EmptyScreen = () => {return null;};

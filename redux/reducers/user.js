@@ -18,6 +18,6 @@ export const user = (state = initialState, action) => {
                 posts: action.posts
             }
         default:
-            break;
+            return state;
     }
 }
