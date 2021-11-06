@@ -18,6 +18,23 @@ export function fetchUser() {
     })
 }
 
+export function fetchOneUser(uid) {
+    return ((dispatch) => {
+        firebase.firestore()
+            .collection("users")
+            .doc(uid)
+            .get()
+            .then((snapshot) => {
+                if(snapshot.exists) {
+                    dispatch({type: USER_STATE_CHANGE, currentUser: snapshot.data()});
+                }
+                else {
+                    console.log('DOES NOT EXIST');
+                }
+            })
+    })
+}
+
 export function fetchUserPosts() {
     return ((dispatch) => {
         firebase.firestore()
@@ -30,7 +47,7 @@ export function fetchUserPosts() {
                 let posts = snapshot.docs.map(doc => {
                     const data = doc.data();
                     const id = doc.id;
-                    return { id, ...data}
+                    return { id, ...data }
                 });
                 dispatch({ type: USER_POST_STATE_CHANGE, posts });
             })
