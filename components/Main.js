@@ -56,7 +56,8 @@ function Main(props) {
             <Tab.Screen name="Profile" component={Profile} navigation={props.navigation}
                 options={{
                     tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="account-circle" color={color} size={26} />
-                }}/>
+                }}>
+            </Tab.Screen>
             <Tab.Screen name="Search" component={Search} navigation={props.navigation}
                 options={{
                     tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="magnify" color={color} size={26} />

@@ -10,7 +10,7 @@ function Profile(props) {
         return () => {
             props.navigation.removeListener('focus', profileOnFocus)
         }
-    }, []);
+    }, [props.route.params.uid]);
 
     const profileOnFocus = () => {
         props.fetchOneUser(props.route.params.uid);

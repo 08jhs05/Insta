@@ -10,16 +10,12 @@ export default function Add( { navigation } ) {
       });
 
     const pickImage = async () => {
-
         let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [1, 1],
         quality: 1,
         });
-
-        console.log(result);
-
         if (!result.cancelled) {
             setState({...state, image: result.uri});
         }
